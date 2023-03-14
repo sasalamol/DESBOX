@@ -3,6 +3,8 @@
 #include <cmath>
 #include <stdio.h>
 #include <stdlib.h>
+#include <bitset>
+
 using namespace std;
 
 	int s_boxes[8][4][16]=  //S_box[box no][row no][column no]
@@ -43,8 +45,8 @@ using namespace std;
 
 int esboks(int sbox_in, int i) { 
 	int val;
-	string x; 
-  itoa(sbox_in, x, 2);
+	std::string x = std::bitset<6>(sbox_in).to_string();
+  //itoa(sbox_in, x, 2); //sometimes itoa does not work with some of the compilers
   //for(intl i=0;i<8; i++){ 
   //remove comment lines and arrage accordinly if sbox number is not fed from outside of the function
     string rows= x.substr(1,1) + x.substr(5,1); //string row1= x.substr(i*6,1) + x.substr(i*6 + 5,1); //(loop version)
@@ -54,8 +56,8 @@ int esboks(int sbox_in, int i) {
     val = s_boxes[i][row][col];
 	  cout<<"\ndes sbox in: "<<x;
 	  cout<<"\ni:"<<i;
-    cout<<"\nrow:"<<row1<<"="<<row;
-    cout<<"\ncol:"<<col1<<"="<<col;
+    cout<<"\nrow:"<<rows<<"="<<row;
+    cout<<"\ncol:"<<cols<<"="<<col;
 	//}
   return val;
 }
